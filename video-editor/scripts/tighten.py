@@ -37,7 +37,9 @@ import uuid
 import wave
 from pathlib import Path
 
-ROOT = Path.home() / "Movies/CapCut/User Data/Projects/com.lveditor.draft"
+import capcut as C
+
+ROOT = C.ROOT
 PROJECTS = Path(__file__).resolve().parent.parent / "projects"
 PAD = 0.1
 MIN_PIECE = 0.3
@@ -375,13 +377,14 @@ def main(job, name, new_name):
     transcript = job_dir / "transcript"
     if dst.exists():
         sys.exit(f"draft already exists: {dst}")
-    if subprocess.run(["pgrep", "-x", "CapCut"], capture_output=True).returncode == 0:
+    if C.running():
         sys.exit("quit CapCut first: it rewrites its draft registry on quit")
 
     plan_path = job_dir / "plan.json"
     plan = json.loads(plan_path.read_text()) if plan_path.exists() else None
-    before = json.loads((src / "draft_info.json").read_text())["duration"] / 1e6
-    d, n, by_clip, used = tighten(json.loads((src / "draft_info.json").read_text()),
+    draft = C.draft_file(src)
+    before = C.read(src / draft)["duration"] / 1e6
+    d, n, by_clip, used = tighten(C.read(src / draft),
                             transcript, plan, job_dir)
 
     # Every spoken word in the parts of each clip the draft uses, on the new
@@ -397,9 +400,9 @@ def main(job, name, new_name):
     write_json(transcript / f"{new_name}.words.json", sorted(kept))
 
     shutil.copytree(src, dst, symlinks=True)
-    # The main timeline keeps its own copy of draft_info.json; write both.
+    # The main timeline keeps its own copy of the draft file; write both.
     proj = json.loads((dst / "Timelines/project.json").read_text())
-    for f in (dst / "draft_info.json", dst / "Timelines" / proj["main_timeline_id"] / "draft_info.json"):
+    for f in (dst / draft, dst / "Timelines" / proj["main_timeline_id"] / draft):
         write_json(f, d)
 
     now = time.time_ns() // 1000
@@ -414,7 +417,7 @@ def main(job, name, new_name):
     reg = json.loads(reg_path.read_text())
     entry = copy.deepcopy(next(e for e in reg["all_draft_store"] if e["draft_name"] == name))
     entry.update(draft_id=draft_id, draft_name=new_name, draft_fold_path=str(dst),
-                 draft_json_file=str(dst / "draft_info.json"),
+                 draft_json_file=str(dst / draft),
                  draft_cover=str(dst / "draft_cover.jpg"),
                  tm_draft_create=now, tm_draft_modified=now, tm_duration=d["duration"])
     reg["all_draft_store"].insert(0, entry)

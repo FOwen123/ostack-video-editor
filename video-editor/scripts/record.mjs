@@ -10,6 +10,7 @@
 // The selected element is scaled to fit --size and padded with its background (else the page's).
 // --scroll pans the shot that many CSS px down the page across the recording, eased in and out.
 import { spawn } from "node:child_process";
+import { launch } from "./chrome.mjs";
 
 const [src, out, secs, ...rest] = process.argv.slice(2);
 if (!secs) { console.error("usage: node record.mjs <file.html|url> <out.mp4> <seconds> [options]"); process.exit(2); }
@@ -31,9 +32,7 @@ window.__step=ms=>{const end=t+ms;for(;;){let due=null;for(const e of timers)if(
 t=end;const cbs=[...rafs.values()];rafs.clear();cbs.forEach(cb=>cb(t))}})();`;
 
 const port = 9300 + Math.floor(Math.random() * 500);
-const chrome = spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  ["--headless=new", "--hide-scrollbars", "--enable-unsafe-swiftshader", `--remote-debugging-port=${port}`,
-   `--user-data-dir=/tmp/record-${port}`, "about:blank"], { stdio: "ignore" });
+const chrome = launch(port, ["--hide-scrollbars", "--enable-unsafe-swiftshader"]);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let ws;
 for (let i = 0; i < 50 && !ws; i++) {

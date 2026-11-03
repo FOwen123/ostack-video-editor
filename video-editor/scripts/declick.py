@@ -13,7 +13,7 @@ through it to fix the lighting; otherwise it is copied. Per clip, "clip_grade": 
 overrides "grade". "mute": {clip: [[from, to], ...]} silences those source seconds (a bleeped word),
 with the same fades. A noisy recording: put a cleaned copy (same video, denoised audio) at projects/<job>/raw/<clip>.mov
 and it replaces the download. A <clip>-key.mov next to
-the loud file (the speaker cut out over a background, keyface.swift) replaces the
+the loud file (the speaker cut out over a background, keyface.swift or keyface.py) replaces the
 raw picture; the audio still comes from the raw recording. Run after tighten.py,
 with CapCut closed; the draft is not changed.
 """
@@ -22,7 +22,9 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path.home() / "Movies/CapCut/User Data/Projects/com.lveditor.draft"
+import capcut as C
+
+ROOT = C.ROOT
 PROJECTS = Path(__file__).resolve().parent.parent / "projects"
 FADE = 0.02
 # no noise reduction: the mic's room noise is ~-75 dB, and afftdn lifted soft speech ~4 dB (1023)
@@ -75,7 +77,7 @@ def picture_for(loud):
 
 
 def main(job, draft, gain):
-    d = json.loads((ROOT / draft / "draft_info.json").read_text())
+    d = C.read(ROOT / draft / C.draft_file(ROOT / draft))
     plan_path = PROJECTS / job / "plan.json"
     plan = json.loads(plan_path.read_text()) if plan_path.exists() else {}
     cutaways = {str(PROJECTS / job / c) for c in plan.get("insert_after", {}).values()}  # carry their own finished sound

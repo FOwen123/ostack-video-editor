@@ -118,6 +118,12 @@ Update with `npx skills@latest update`; re-run `add` to pick up new skills.
 ./scripts/link-skills.sh   # links each skill into ~/.claude/skills and ~/.agents/skills
 ```
 
+On Windows, in PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\link-skills.ps1
+```
+
 Handy when you change the skills yourself: edits in the clone take effect straight away.
 
 </details>
@@ -126,9 +132,18 @@ Plugin installs pick up a new release only when `version` in `.claude-plugin/plu
 
 ## Requirements
 
-- macOS (the Swift face tools use Apple's Vision framework), CapCut desktop 9.4
+- macOS or Windows, with CapCut desktop 9.4
 - `ffmpeg`, Python 3, Node and pnpm, Google Chrome (for `record.mjs` and `shot.mjs`)
 - `whisper-cli` (whisper.cpp) with the model at `~/.cache/whisper/ggml-large-v3-turbo.bin`
+- For the head-follow zoom and cutting the speaker out over a background: on macOS, nothing more (the Swift tools use Apple's Vision); elsewhere, `pip install mediapipe` for `facetrack.py` and `keyface.py` (their models download on first use)
+
+**On Windows**
+
+- Run your agent with Git Bash as its shell (Claude Code does by default): the skills' commands are bash. Where they say `python3`, Windows' Python may only answer to `python`; `AGENTS.md` tells the agent to swap it.
+- Turn on Python's UTF-8 mode once, so the Chinese subtitles and CapCut's drafts read and write correctly: `setx PYTHONUTF8 1`, then open a new terminal.
+- CapCut's drafts are found at `%LOCALAPPDATA%\CapCut\User Data\Projects\com.lveditor.draft`; set `CAPCUT_DRAFTS` if yours are elsewhere, and `CHROME` if Chrome isn't in its usual place.
+- Some CapCut versions encrypt their drafts. The scripts check, and stop with a message rather than writing over one they can't read.
+- Windows support is new and hasn't been run on a Windows machine yet: please open an issue with anything that breaks.
 
 Skills from other authors that these call, installed separately:
 

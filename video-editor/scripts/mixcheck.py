@@ -17,7 +17,6 @@ true peak (target: -14 LUFS, peak under -1 dB), and lists:
 Pass: loudness -14 +/-0.5, peak under -1 dB, no "cut" spikes, no dead air.
 """
 import array
-import json
 import os
 import re
 import shlex
@@ -25,9 +24,10 @@ import subprocess
 import sys
 import tempfile
 import wave
-from pathlib import Path
 
-ROOT = Path.home() / "Movies/CapCut/User Data/Projects/com.lveditor.draft"
+import capcut as C
+
+ROOT = C.ROOT
 
 
 def spikes(x, sr, block=0.005, ratio=5.0):
@@ -111,7 +111,7 @@ def mix_command(d, wav):
 
 
 def main(draft):
-    d = json.loads((ROOT / draft / "draft_info.json").read_text())
+    d = C.read(ROOT / draft / C.draft_file(ROOT / draft))
     main_track = next(t for t in d["tracks"] if t["type"] == "video" and t["flag"] == 0)
     cuts = [s["target_timerange"]["start"] / 1e6 for s in main_track["segments"]][1:]
     mats = {m["id"]: m for m in d["materials"]["videos"]}

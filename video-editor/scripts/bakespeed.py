@@ -7,7 +7,7 @@ segment with speed != 1, this renders projects/<job>/capcut/media/<clip>-x<speed
 from <clip>-loud.mov (picture setpts, audio atempo: pitch kept), points the segment
 at it with its source range divided by the speed, and sets the speed to 1. Run
 after declick.py (the fades and grade must already be in -loud.mov), with CapCut
-closed. Writes both copies of draft_info.json.
+closed. Writes both copies of the draft file (draft_info.json, or draft_content.json on Windows).
 """
 import json
 import os
@@ -16,7 +16,9 @@ import sys
 import uuid
 from pathlib import Path
 
-ROOT = Path.home() / "Movies/CapCut/User Data/Projects/com.lveditor.draft"
+import capcut as C
+
+ROOT = C.ROOT
 
 
 def baked(source, target, speed):
@@ -35,7 +37,8 @@ def render(loud, out, speed):
 
 def main(job, draft):
     folder = ROOT / draft
-    d = json.loads((folder / "draft_info.json").read_text())
+    draft = C.draft_file(folder)
+    d = C.read(folder / draft)
     mats = {m["id"]: m for m in d["materials"]["videos"]}
     main_track = next(t for t in d["tracks"] if t["type"] == "video" and t["flag"] == 0)
     speeds = {m["id"]: m for m in d["materials"].get("speeds", [])}
@@ -63,7 +66,7 @@ def main(job, draft):
             if r in speeds:
                 speeds[r]["speed"] = 1.0
     proj = json.loads((folder / "Timelines/project.json").read_text())
-    for f in (folder / "draft_info.json", folder / "Timelines" / proj["main_timeline_id"] / "draft_info.json"):
+    for f in (folder / draft, folder / "Timelines" / proj["main_timeline_id"] / draft):
         tmp = f.with_suffix(".json.tmp")
         tmp.write_text(json.dumps(d, ensure_ascii=False, separators=(",", ":")))
         os.replace(tmp, f)

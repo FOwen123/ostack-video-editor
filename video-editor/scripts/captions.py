@@ -16,7 +16,9 @@ import sys
 import uuid
 from pathlib import Path
 
-ROOT = Path.home() / "Movies/CapCut/User Data/Projects/com.lveditor.draft"
+import capcut as C
+
+ROOT = C.ROOT
 Y = {"en": -0.54, "zh": -0.70}  # ~77% and ~85% down the frame: chest, clear of app UI
 
 
@@ -69,14 +71,15 @@ def main(cues_path, draft, style_from="0929-v1", y=Y):
     cues_path = Path(cues_path)
     spec = json.loads(cues_path.read_text())
 
-    src = json.loads((ROOT / style_from / "draft_info.json").read_text())
+    src = C.read(ROOT / style_from / C.draft_file(ROOT / style_from))
     byid = {m["id"]: (cat, m) for cat, lst in src["materials"].items() if isinstance(lst, list)
             for m in lst if isinstance(m, dict) and "id" in m}
     tmpl_track = next(t for t in src["tracks"] if t["type"] == "text")
     tmpl_seg = tmpl_track["segments"][0]
 
     folder = ROOT / draft
-    d = json.loads((folder / "draft_info.json").read_text())
+    draft = C.draft_file(folder)
+    d = C.read(folder / draft)
     # Measure the end from the video itself: a caption that once ran long has
     # already stretched d["duration"].
     video_us = max(s["target_timerange"]["start"] + s["target_timerange"]["duration"]
@@ -114,7 +117,7 @@ def main(cues_path, draft, style_from="0929-v1", y=Y):
             d["tracks"].append(track)
 
     proj = json.loads((folder / "Timelines/project.json").read_text())
-    for f in (folder / "draft_info.json", folder / "Timelines" / proj["main_timeline_id"] / "draft_info.json"):
+    for f in (folder / draft, folder / "Timelines" / proj["main_timeline_id"] / draft):
         write_json(f, d)
 
     stem = cues_path.name.removesuffix(".cues.json")

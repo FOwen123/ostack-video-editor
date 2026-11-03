@@ -6,15 +6,13 @@
 // <p>/<li> containing the text, and captures just that block with a little
 // padding. --dark flips the page to a dark theme (photos keep their colours),
 // for sites like Substack that have no dark mode on the web.
-import { spawn } from "node:child_process";
+import { launch } from "./chrome.mjs";
 import { writeFileSync } from "node:fs";
 
 const [url, text, out, flag] = process.argv.slice(2);
 if (!out) { console.error('usage: node shot.mjs <url> "<text>" <out.png> [--dark]'); process.exit(2); }
 const port = 9300 + Math.floor(Math.random() * 500);
-const chrome = spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  ["--headless=new", "--disable-gpu", "--hide-scrollbars", `--remote-debugging-port=${port}`,
-   `--user-data-dir=/tmp/shot-${port}`, "about:blank"], { stdio: "ignore" });
+const chrome = launch(port, ["--disable-gpu", "--hide-scrollbars"]);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let ws;
 for (let i = 0; i < 50 && !ws; i++) {

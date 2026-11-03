@@ -17,21 +17,23 @@ Head-follow (split screen): "follow": {"scale": 1.15, "y": -0.5} in plan.json sc
 face cam up and moves it every STEP seconds with the face, smoothed over SMOOTH seconds:
 sideways it cancels the head's movement around where it sits on average in that clip, and
 up and down it holds the face at that y (canvas half-heights; -0.5 = the bottom half's
-centre). Zooms multiply the follow scale. Face tracks come from facetrack.swift, one per clip:
+centre). Zooms multiply the follow scale. Face tracks come from facetrack.swift (macOS) or facetrack.py (any system), one per clip:
   swiftc -O facetrack.swift -o /tmp/facetrack
   /tmp/facetrack capcut/media/IMG_9216-loud.mov 10 > edit-assets/face/IMG_9216.json
+  python3 facetrack.py capcut/media/IMG_9216-loud.mov 10 > edit-assets/face/IMG_9216.json
 The face cam never shows an edge at the sides or bottom; the top half is always under an overlay.
 While an overlay marked "full_face": true is up (a card over the face video), the face cam
 cuts back to its full frame around it, holding the face as low as that frame allows. CapCut adds position keyframes to the clip's own
 position, so the follow zeroes that and its keyframes carry the whole offset.
 """
 import json
-import subprocess
 import sys
 import uuid
 from pathlib import Path
 
-ROOT = Path.home() / "Movies/CapCut/User Data/Projects/com.lveditor.draft"
+import capcut as C
+
+ROOT = C.ROOT
 PROJECTS = Path(__file__).resolve().parent.parent / "projects"
 SCALE = ("KFTypeScaleX", "KFTypeScaleY")
 POS = ("KFTypePositionX", "KFTypePositionY")
@@ -135,7 +137,7 @@ def apply(d, zooms, follow=None, faces=None, full=None):
 
 
 def main(job, draft):
-    if subprocess.run(["pgrep", "-x", "CapCut"], capture_output=True).returncode == 0:
+    if C.running():
         sys.exit("quit CapCut first: it rewrites its draft registry on quit")
     plan = json.loads((PROJECTS / job / "plan.json").read_text())
     zooms, follow = plan.get("zooms", []), plan.get("follow")
@@ -145,12 +147,13 @@ def main(job, draft):
             full.setdefault(o["clip"], []).append((o["from"], o["to"]))
     faces = {f.stem: json.loads(f.read_text()) for f in (PROJECTS / job / "edit-assets/face").glob("*.json")} if follow else None
     folder = ROOT / draft
-    d = json.loads((folder / "draft_info.json").read_text())
+    draft = C.draft_file(folder)
+    d = C.read(folder / draft)
     hits = apply(d, zooms, follow, faces, full)
     for z, n in zip(zooms, hits):
         assert n, f"zoom lands in no kept piece (cut out?): {z}"
     proj = json.loads((folder / "Timelines/project.json").read_text())
-    for f in (folder / "draft_info.json", folder / "Timelines" / proj["main_timeline_id"] / "draft_info.json"):
+    for f in (folder / draft, folder / "Timelines" / proj["main_timeline_id"] / draft):
         tmp = f.with_suffix(".json.tmp")
         tmp.write_text(json.dumps(d, ensure_ascii=False, separators=(",", ":")))
         tmp.replace(f)

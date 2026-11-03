@@ -68,7 +68,8 @@ def cut(job, draft):
     job_dir = T.PROJECTS / job
     plan_path = job_dir / "plan.json"
     plan = json.loads(plan_path.read_text()) if plan_path.exists() else {}
-    d = json.loads((T.ROOT / draft / "draft_info.json").read_text())
+    folder = T.ROOT / draft
+    d = T.C.read(folder / T.C.draft_file(folder))
     d, _, by_clip, _ = T.tighten(d, job_dir / "transcript", {k: v for k, v in plan.items() if k != "overlays"}, job_dir)
     return d, by_clip, plan
 
