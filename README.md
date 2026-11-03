@@ -39,22 +39,90 @@ Your video jobs (footage, CapCut drafts, renders) stay out of git (`.gitignore`)
 
 ## Install
 
-**As a Claude Code plugin** (Claude Code 2.1.275 or later):
+### 1. Clone the workspace
 
-```
-/plugin install ostack-video-editor --marketplace FOwen123/ostack-video-editor
-```
-
-**From a clone**, which also gives you the scripts and the Remotion project the skills run:
+The skills run the tools in this repo (`video-editor/scripts/`, the Remotion project), so every route starts here, and you open your agent in this folder:
 
 ```sh
 git clone https://github.com/FOwen123/ostack-video-editor.git
 cd ostack-video-editor
-./scripts/link-skills.sh        # links each skill into ~/.claude/skills and ~/.agents/skills (Codex)
 (cd video-editor/projects/0926/remotion && pnpm install)
 ```
 
-Then open your agent in the repository root: the skills' paths (`video-editor/...`) start there, and it reads `AGENTS.md` first. `git pull` updates the linked skills.
+### 2. Add the skills to your agent
+
+A plugin updates itself; the other routes copy files you update by hand. Pick one route per agent, because two routes give you every skill twice.
+
+<details>
+<summary><strong>Claude Code</strong></summary>
+
+```bash
+claude plugin marketplace add FOwen123/ostack-video-editor
+claude plugin install ostack-video-editor@ostack
+```
+
+Or, inside Claude Code 2.1.275 or later: `/plugin install ostack-video-editor --marketplace FOwen123/ostack-video-editor`. Update with `claude plugin marketplace update ostack`.
+
+</details>
+
+<details>
+<summary><strong>Codex</strong></summary>
+
+```bash
+codex plugin marketplace add FOwen123/ostack-video-editor
+codex plugin add ostack-video-editor@ostack
+```
+
+Updates itself at startup.
+
+</details>
+
+<details>
+<summary><strong>GitHub Copilot</strong> (CLI and VS Code; not tested yet)</summary>
+
+```bash
+copilot plugin marketplace add FOwen123/ostack-video-editor
+copilot plugin install ostack-video-editor@ostack
+```
+
+In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/FOwen123/ostack-video-editor`.
+
+</details>
+
+<details>
+<summary><strong>Gemini CLI</strong> (manual updates; not tested yet)</summary>
+
+```bash
+gemini skills install https://github.com/FOwen123/ostack-video-editor.git --path skills
+```
+
+Re-run it to update.
+
+</details>
+
+<details>
+<summary><strong>Cursor, OpenCode, Windsurf, Amp and other agents</strong> (manual updates)</summary>
+
+```bash
+npx skills@latest add FOwen123/ostack-video-editor -a <agent>   # e.g. cursor, opencode, windsurf, amp; omit -a to choose
+```
+
+Update with `npx skills@latest update`; re-run `add` to pick up new skills.
+
+</details>
+
+<details>
+<summary><strong>Linked from your clone</strong> (Claude Code and Codex; updates with <code>git pull</code>)</summary>
+
+```bash
+./scripts/link-skills.sh   # links each skill into ~/.claude/skills and ~/.agents/skills
+```
+
+Handy when you change the skills yourself: edits in the clone take effect straight away.
+
+</details>
+
+Plugin installs pick up a new release only when `version` in `.claude-plugin/plugin.json` changes, so bump it with every change you want users to get.
 
 ## Requirements
 
