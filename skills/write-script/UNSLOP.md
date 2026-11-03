@@ -1,6 +1,6 @@
 # Unslop: not sounding like AI
 
-The general layer of the voice: what makes any script sound machine-written once it's spoken. It holds for every creator. [voice.md](voice.md) is the creator's own layer and wins where they disagree: a phrase the user really says stays, even if it's on this list.
+The general layer of the voice: what makes any script sound machine-written once it's spoken. It holds for every creator. [VOICE.md](VOICE.md) is the creator's own layer and wins where they disagree: a phrase the user really says stays, even if it's on this list.
 
 Read each line as the user would say it on camera, and rewrite every line that hits a pattern below, keeping its meaning and its facts.
 

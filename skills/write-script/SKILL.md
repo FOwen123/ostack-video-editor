@@ -5,13 +5,13 @@ description: Write or rework the spoken script of a short, from research to a st
 
 # Write script
 
-A source (article, paper, launch page, a story from the user's life) becomes one file, `video-editor/projects/<job>/script.md`, that the user records from and that every later step reads: the teleprompter, the **hook** skill and the **edit-video** plan. Write in the user's voice ([voice.md](voice.md)).
+A source (article, paper, launch page, a story from the user's life) becomes one file, `video-editor/projects/<job>/script.md`, that the user records from and that every later step reads: the teleprompter, the **hook** skill and the **edit-video** plan. Write in the user's voice ([VOICE.md](VOICE.md)).
 
 Companion files:
 
-- [shapes.md](shapes.md): the three shapes a script can take (news, journey, personal) and each one's spine, peaks, length and ending.
-- [checklist.md](checklist.md): the checks every script passes before the user sees it.
-- The voice, in two layers: [unslop.md](unslop.md), what makes any script sound machine-written, and [voice.md](voice.md), this creator's persona and how they talk, which grows with every script (step 8). Their views live in [opinions.md](opinions.md).
+- [SHAPES.md](SHAPES.md): the three shapes a script can take (news, journey, personal) and each one's spine, peaks, length and ending.
+- [CHECKLIST.md](CHECKLIST.md): the checks every script passes before the user sees it.
+- The voice, in two layers: [UNSLOP.md](UNSLOP.md), what makes any script sound machine-written, and [VOICE.md](VOICE.md), this creator's persona and how they talk, which grows with every script (step 8). Their views live in [OPINIONS.md](OPINIONS.md).
 
 ## Steps
 
@@ -19,7 +19,7 @@ Companion files:
 
 Read every source the user gave, then the company's or author's own page. Build the fact table: each claim the script might make, its source link, and the source's exact words. Mark a claim the source states as the company's own, unverified number (Nolla's 96%), so the script says so. For a personal story, the user is the source: list what you need from them (what happened, when, the numbers, what they felt) and ask; leave a gap marked `[ask]` until they answer.
 
-When the user brings their own draft, sort its lines into three groups before editing, using [opinions.md](opinions.md) to recognise views they've held before: **opinion** (their view; it stays in their words), **fact** (checked like any claim) and **unsure** (a view phrased as a fact, such as "our brains are wired to save energy"). Ask which group each unsure line belongs to, in one question. Push back on a fact the sources contradict, with the source, and suggest a fix; never cut or soften an opinion on your own. Lines the user has already edited stay word for word; suggest a change to one instead of making it. Add each answer to opinions.md.
+When the user brings their own draft, sort its lines into three groups before editing, using [OPINIONS.md](OPINIONS.md) to recognise views they've held before: **opinion** (their view; it stays in their words), **fact** (checked like any claim) and **unsure** (a view phrased as a fact, such as "our brains are wired to save energy"). Ask which group each unsure line belongs to, in one question. Push back on a fact the sources contradict, with the source, and suggest a fix; never cut or soften an opinion on your own. Lines the user has already edited stay word for word; suggest a change to one instead of making it. Add each answer to OPINIONS.md.
 
 Done when every claim in the script can point at a row of the fact table.
 
@@ -27,7 +27,7 @@ Done when every claim in the script can point at a row of the fact table.
 
 Write three lines and show them to the user with the shape:
 
-- **Shape**: news, journey or personal ([shapes.md](shapes.md)); it sets the format. A news video can carry a journey section in its middle.
+- **Shape**: news, journey or personal ([SHAPES.md](SHAPES.md)); it sets the format. A news video can carry a journey section in its middle.
 - **Contrast**: what the viewer assumes, and what is actually true.
 - **Emotion**: the one feeling the video transfers (curiosity, awe, fear, shock, hope).
 
@@ -49,13 +49,13 @@ Done when the map fits the length target with no gap over 15 seconds between pea
 
 ### 5. Write
 
-Write the lines from the peak map in the user's voice ([voice.md](voice.md)), then make the [unslop.md](unslop.md) pass; where the two disagree, voice.md wins. Mark each line FACE (on camera) or VO (voice-over under pictures or animation), and give each animated line its style: the video's lead style, or another when the line needs it (`animated-shots` skill, styles.md). Leave the style empty until the user picks a style frame, unless they named one. FACE goes on the turns: the hook when the face is in the thumbnail, the question that opens a section, the doubt beat, the ending.
+Write the lines from the peak map in the user's voice ([VOICE.md](VOICE.md)), then make the [UNSLOP.md](UNSLOP.md) pass; where the two disagree, VOICE.md wins. Mark each line FACE (on camera) or VO (voice-over under pictures or animation), and give each animated line its style: the video's lead style, or another when the line needs it (`animated-shots` skill, STYLES.md). Leave the style empty until the user picks a style frame, unless they named one. FACE goes on the turns: the hook when the face is in the thumbnail, the question that opens a section, the doubt beat, the ending.
 
 Done when every beat of the map has its line.
 
 ### 6. Check
 
-Run [checklist.md](checklist.md) and fix every failure. Show the user the result as a table (check, pass or fixed, the line it touched), with the word count and the estimated length.
+Run [CHECKLIST.md](CHECKLIST.md) and fix every failure. Show the user the result as a table (check, pass or fixed, the line it touched), with the word count and the estimated length.
 
 Done when every check passes.
 
@@ -72,9 +72,9 @@ Done when the file exists, the card matches it, and the caption is written.
 
 Run this whenever the user changes a line you wrote, wherever they change it (`script.md`, their board, a chat message), and once more after the edit, against the transcript of what they actually said on camera. Compare their version with yours line by line. Set aside fact fixes, cuts for length, lines dropped in the edit and the transcript's misspellings of names; each other change shows how they talk:
 
-- **Their own habit** (a phrase they swap in, a way they open or end): a row in voice.md's Learned table. When the same kind of change shows up a second time, write it as a rule under How they talk and drop its rows.
-- **A general AI tell** they removed: a line in unslop.md.
-- **A view** they added or defended: opinions.md (step 1).
+- **Their own habit** (a phrase they swap in, a way they open or end): a row in VOICE.md's Learned table. When the same kind of change shows up a second time, write it as a rule under How they talk and drop its rows.
+- **A general AI tell** they removed: a line in UNSLOP.md.
+- **A view** they added or defended: OPINIONS.md (step 1).
 
 Tell the user in one line what you recorded, so they can correct it.
 

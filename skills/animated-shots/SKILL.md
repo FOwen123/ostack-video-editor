@@ -1,11 +1,11 @@
 ---
 name: animated-shots
-description: Animate a face-cam short in Remotion: full animated shots in 2D, isometric or 3D, whole animated videos, and animated cards and memes. Use when the user asks to animate lines or a whole video, for the animated shots of a news or education video, to pick or change an animation style, or for motion design, cards or memes.
+description: Animate a face-cam short in Remotion, from single shots to whole videos, in 2D, isometric or 3D, plus animated cards and memes. Use when the user asks to animate lines or a whole video, for the animated shots of a news or education video, to pick or change an animation style, or for motion design, cards or memes.
 ---
 
 # Animated shots
 
-Everything in our videos that is drawn in Remotion: full-frame illustrated or 3D shots that carry VO lines, props over a FACE line, whole animated videos, and the cards and memes in [cards.md](cards.md). The look is `video-editor/DESIGN.md` (palette, type, Animated shots, Beats, Subtitles); the styles are [styles.md](styles.md); the judges are [review.md](review.md).
+Everything in our videos that is drawn in Remotion: full-frame illustrated or 3D shots that carry VO lines, props over a FACE line, whole animated videos, and the cards and memes in [CARDS.md](CARDS.md). The look is `video-editor/DESIGN.md` (palette, type, Animated shots, Beats, Subtitles); the styles are [STYLES.md](STYLES.md); the judges are [REVIEW.md](REVIEW.md).
 
 ## Who owns the timeline
 
@@ -29,17 +29,17 @@ Done when every animated row of the storyboard has a shot, a style and its cue f
 
 ## 2. Style frames
 
-Choose fresh for this video. Offer three styles that genuinely differ and each fit its subject (styles.md, Choosing), with one line on how the video would feel in each and the one you recommend. Past picks show what the user tends to like; they don't decide this video's style. Unless the user already named the style, one builder per style renders the same beat, the video's hardest, at 1080 × 1920 with the subtitle zone shown. Feedback rounds change the picked frame without losing what was already approved.
+Choose fresh for this video. Offer three styles that genuinely differ and each fit its subject (STYLES.md, Choosing), with one line on how the video would feel in each and the one you recommend. Past picks show what the user tends to like; they don't decide this video's style. Unless the user already named the style, one builder per style renders the same beat, the video's hardest, at 1080 × 1920 with the subtitle zone shown. Feedback rounds change the picked frame without losing what was already approved.
 
 Done when the user has picked a style frame.
 
 ## 3. Build
 
-You build the shared parts first: one folder per video, `video-editor/projects/0926/remotion/src/<topic>/`, its own Remotion entry: `index.ts` (`registerRoot` on the folder's root), `Root.tsx` registering one composition per shot with its exact length (plus the whole film when this skill owns the timeline), `kit.tsx` (palette, type and the style's parts, from the style's kit in styles.md), `cues.ts`. Then write one brief per group of shots (the look, the standing notes below, the cues, the files that builder owns) and start the builders in parallel. Compute everything from the frame number (seeded random only), so a still and the render show the same frame.
+You build the shared parts first: one folder per video, `video-editor/projects/0926/remotion/src/<topic>/`, its own Remotion entry: `index.ts` (`registerRoot` on the folder's root), `Root.tsx` registering one composition per shot with its exact length (plus the whole film when this skill owns the timeline), `kit.tsx` (palette, type and the style's parts, from the style's kit in STYLES.md), `cues.ts`. Then write one brief per group of shots (the look, the standing notes below, the cues, the files that builder owns) and start the builders in parallel. Compute everything from the frame number (seeded random only), so a still and the render show the same frame.
 
 The standing notes, from the user's feedback on every animated video so far:
 
-- **Literal.** The picture says the words being spoken, at the moment they're spoken: each object, label or logo appears on the word that names it. With the sound off, a viewer can retell the line (the mute test, review.md).
+- **Literal.** The picture says the words being spoken, at the moment they're spoken: each object, label or logo appears on the word that names it. With the sound off, a viewer can retell the line (the mute test, REVIEW.md).
 - **Big and close.** One subject per beat, filling 60–85% of the frame width; text at least 54px.
 - **Readable.** Text, diagrams, charts, rows and sequences face the camera flat and read left to right, in every style.
 - **Alive.** Each beat has a main action, things reacting to it, and background life, so the frame is never down to one moving part. The camera moves only for a reason: to follow, to reveal, or to land on something. In 3D the camera keeps moving through the whole shot, drifting or pushing between its moves. Entries ease with anticipation, overshoot and settle.
@@ -53,7 +53,7 @@ Done when `pnpm lint` passes and every shot renders end to end.
 
 ## 4. Judges
 
-Run the two judges ([review.md](review.md)): the mute test, and finish and facts. Check the user's requests yourself (review.md, Requests). Route each issue to the builder that owns the shot, fix in parallel, re-render, spot-check every fix yourself, and run again only the judge whose lens the fix touched.
+Run the two judges ([REVIEW.md](REVIEW.md)): the mute test, and finish and facts. Check the user's requests yourself (REVIEW.md, Requests). Route each issue to the builder that owns the shot, fix in parallel, re-render, spot-check every fix yourself, and run again only the judge whose lens the fix touched.
 
 Done when every judge passes, or the top open issue needs the user. Report which judges ran, what each found, and which shots you checked by stills only.
 
@@ -68,7 +68,7 @@ pnpm exec remotion render src/<topic>/index.ts <Id> <out>.mov --muted \
 
 Without all three transparency flags the background renders black and hides the speaker; `ffprobe` shows `yuva444p10le` when it worked.
 
-- **Camera edit:** the job's `sfx.py` (from `_template/`, its `CUES` filled in) mixes the sound effects into each shot on their cue words and writes the files to the paths in `plan.json`. Rebuild the draft with `tighten.py` (**edit-video**) and scrub to each shot in CapCut (`skills/edit-video/capcut-safety.md`).
+- **Camera edit:** the job's `sfx.py` (from `_template/`, its `CUES` filled in) mixes the sound effects into each shot on their cue words and writes the files to the paths in `plan.json`. Rebuild the draft with `tighten.py` (**edit-video**) and scrub to each shot in CapCut (`skills/edit-video/CAPCUT-SAFETY.md`).
 - **Animated video:** the film composition plays the voice, the shots, the sound effects (`DESIGN.md`, Sound) and `<Subtitles cues={...} />` from `src/Subtitles.tsx` on top (the `DESIGN.md` Subtitles look, measured against CapCut's). Render it to `projects/<job>/<MMDD>-v<N>.mp4`, then check frame 0 (the thumbnail, **hook** skill), the last second, and the loudness: `ffmpeg -i <film>.mp4 -af ebur128=peak=true -f null -` reads −14 ±0.5 LUFS with true peak under −1 dB.
 
 Each round of changes is a new numbered version, and the shots it changes are new files, so earlier versions still play as they were.

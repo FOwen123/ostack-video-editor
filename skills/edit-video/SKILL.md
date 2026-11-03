@@ -5,7 +5,7 @@ description: Turn raw face-cam clips in a CapCut project into a tight, loud, sub
 
 # Edit video
 
-Raw clips in a CapCut draft become a new draft with clean audio, natural light, no dead air, a hook, still pictures on every point, and English + Traditional Chinese subtitles. The look comes from `video-editor/DESIGN.md`. Every CapCut write follows [capcut-safety.md](capcut-safety.md). Scripts are in `video-editor/scripts/` (usage in each docstring).
+Raw clips in a CapCut draft become a new draft with clean audio, natural light, no dead air, a hook, still pictures on every point, and English + Traditional Chinese subtitles. The look comes from `video-editor/DESIGN.md`. Every CapCut write follows [CAPCUT-SAFETY.md](CAPCUT-SAFETY.md). Scripts are in `video-editor/scripts/` (usage in each docstring).
 
 The user records the clips and adds them, in order, to a new CapCut project named `MMDD` (for example `0930`). A job is a folder `video-editor/projects/<MMDD>/` (copy `_template/`; screenshots and screen recordings go in `broll/`). CapCut drafts stay in CapCut's own folder; the job folder holds only inputs and outputs. Each build is a new draft `<MMDD>-v1`, `-v2`…; the user's own draft is never touched.
 

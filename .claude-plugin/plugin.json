@@ -1,0 +1,28 @@
+{
+  "name": "ostack-video-editor",
+  "version": "0.1.0",
+  "description": "Agent skills for vertical face-cam shorts: script in your voice, hook, CapCut edit, pictures, animation and bilingual subtitles.",
+  "author": {
+    "name": "Owen",
+    "url": "https://github.com/FOwen123"
+  },
+  "repository": "https://github.com/FOwen123/ostack-video-editor",
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "shorts",
+    "reels",
+    "tiktok",
+    "capcut",
+    "remotion",
+    "subtitles",
+    "skills"
+  ],
+  "skills": [
+    "./skills/write-script",
+    "./skills/hook",
+    "./skills/edit-video",
+    "./skills/find-pictures",
+    "./skills/animated-shots"
+  ]
+}

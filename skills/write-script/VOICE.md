@@ -1,6 +1,6 @@
 # The user's voice on camera
 
-The creator's own layer of the voice: who they are, who they talk to, and how they say things. It wins over [unslop.md](unslop.md) where the two disagree. Start it from the subtitles of your published videos; it grows with every script (SKILL.md, step 8).
+The creator's own layer of the voice: who they are, who they talk to, and how they say things. It wins over [UNSLOP.md](UNSLOP.md) where the two disagree. Start it from the subtitles of your published videos; it grows with every script (SKILL.md, step 8).
 
 ## Persona
 
@@ -19,7 +19,7 @@ The examples show the kind of line to collect.
 - **Sentences:** length and how they start.
 - **Numbers:** how you say them (e.g. "$5 a month").
 - **Skepticism beat:** how you voice doubt in news videos.
-- **Opinions:** your own views stay in, unsourced and unsoftened. Fact-check only what's said as fact; list opinions in the fact table as yours. Which lines are opinions: SKILL.md step 1 and [opinions.md](opinions.md).
+- **Opinions:** your own views stay in, unsourced and unsoftened. Fact-check only what's said as fact; list opinions in the fact table as yours. Which lines are opinions: SKILL.md step 1 and [OPINIONS.md](OPINIONS.md).
 - **Casual phrases:** words you use often.
 - **Endings:** how you close, and the call to action you use.
 - **What you cut:** phrases the AI keeps adding that you always remove.

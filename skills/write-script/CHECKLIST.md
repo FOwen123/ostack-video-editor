@@ -13,7 +13,7 @@ Every script passes these before the user sees it (step 6).
 | **Anticipation** | Something is teased before it's paid off, in the user's words ("And that's not even the scary part"). |
 | **Emotion** | Words, visuals and sounds serve the one emotion from the angle. |
 | **Rhythm** | Mostly short sentences, a medium or long one now and then. Many start with And, But or So. |
-| **Voice** | Reads like the user's published scripts ([voice.md](voice.md)): their turns, their skepticism, their endings; the [unslop.md](unslop.md) pass is done. |
+| **Voice** | Reads like the user's published scripts ([VOICE.md](VOICE.md)): their turns, their skepticism, their endings; the [UNSLOP.md](UNSLOP.md) pass is done. |
 | **Facts** | Every claim matches its fact-table row; company-reported numbers are said as theirs. |
 | **Length** | Word count ÷ 3.2 fits the shape's target. |
 | **Ending** | Matches the shape: personal line and CTA, zoom-out callback, or callback to the opening. |

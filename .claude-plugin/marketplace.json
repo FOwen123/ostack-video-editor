@@ -1,0 +1,22 @@
+{
+  "name": "ostack",
+  "owner": {
+    "name": "Owen",
+    "url": "https://github.com/FOwen123"
+  },
+  "description": "Owen's agent skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "ostack-video-editor",
+      "source": "./",
+      "description": "Agent skills for vertical face-cam shorts: script in your voice, hook, CapCut edit, pictures, animation and bilingual subtitles.",
+      "category": "video",
+      "keywords": [
+        "video",
+        "shorts",
+        "capcut",
+        "remotion"
+      ]
+    }
+  ]
+}

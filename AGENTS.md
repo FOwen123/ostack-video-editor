@@ -2,7 +2,7 @@
 
 Vertical face-cam shorts (1080 × 1920) for Instagram Reels and TikTok, edited in CapCut with Remotion overlays and bilingual English + Traditional Chinese subtitles.
 
-Three pillars, each with its script shape (`write-script` shapes.md):
+Three pillars, each with its script shape (`write-script` SHAPES.md):
 
 - **AI info**: AI news, AI in general, AI startups the user finds interesting. News shape.
 - **Education**: how AI and technology work. Journey shape.
@@ -24,12 +24,12 @@ In `skills/`:
 - **edit-video**: new video end to end: transcribe, fact-check, plan, build, check.
 - **find-pictures**: the still pictures for each point (sources, logos, screenshots, placing).
 - **hook**: the opening picture and title, the thumbnail frame.
-- **animated-shots**: everything animated in Remotion: shots inside a video (the default in news and education videos), whole animated videos, and cards and memes (when the user asks). Styles in its `styles.md`.
+- **animated-shots**: everything animated in Remotion: shots inside a video (the default in news and education videos), whole animated videos, and cards and memes (when the user asks). Styles in its `STYLES.md`.
 - **agent-reach** (optional, installed separately: see README): research for a video, in every skill above that reads the web.
 
 ## Rules
 
-- CapCut drafts stay in CapCut's own folder. Quit CapCut before any script writes a draft (see `edit-video/capcut-safety.md`).
+- CapCut drafts stay in CapCut's own folder. Quit CapCut before any script writes a draft (see `edit-video/CAPCUT-SAFETY.md`).
 - Leave CapCut's Pro and upgrade buttons for the user to click.
 - Use official press assets or the user's own files for pictures, clips and sound effects. Ask before pulling anything from another creator.
 

@@ -41,7 +41,7 @@ A small leaf-shaped dot (Highlight green, two opposite corners rounded) marks la
 
 ## Formats
 
-Each line of the script is FACE (the speaker on camera) or VO (voice-over under pictures or animation). A video uses one of these formats, or mixes the last two. The shape sets the default (`write-script` shapes.md) and the user can override it per video:
+Each line of the script is FACE (the speaker on camera) or VO (voice-over under pictures or animation). A video uses one of these formats, or mixes the last two. The shape sets the default (`write-script` SHAPES.md) and the user can override it per video:
 
 1. **Face cam with pictures**: the speaker fills the frame; pictures cut into the headroom. Personal and opinion videos.
 2. **Split screen**: shots in the top half (1080 × 960), the speaker in the bottom half, subtitles on the seam between them (the Anatomy video).
@@ -88,7 +88,7 @@ The picture only, uncropped, with 20px rounded corners, sized to fit a 940 × 52
 
 Full-frame illustrated or 3D shots that carry VO lines (format 3), or the top half in format 2. The subtitles still say the words, so the shot shows the idea, not the sentence:
 
-- **Style**: chosen fresh for each video from its subject (2D, isometric, 3D or another), one lead style per video; a shot may borrow another when its line needs it, in the same palette and type. Diagrams, charts and text always face the camera flat (`animated-shots` skill, styles.md).
+- **Style**: chosen fresh for each video from its subject (2D, isometric, 3D or another), one lead style per video; a shot may borrow another when its line needs it, in the same palette and type. Diagrams, charts and text always face the camera flat (`animated-shots` skill, STYLES.md).
 - **Header** (default on every section): one or two words in DM Serif Display capitals that name which part of the video this is ("SEP 17", "D-DAY", "AI WORM", "SELF-LEARNING"). It labels the section and adds what the subtitles don't say; a header that repeats the spoken line is useless, so pick the section's name instead. A logo may slide in beside it on the word that names it.
 - **Labels**: only the ones the viewer needs to follow the picture. Pills, source lines, dates, company tags and step chips stay off the shot.
 - **Arrows**: a plain arrow points at the thing; the words come from the voice.

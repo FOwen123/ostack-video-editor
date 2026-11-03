@@ -10,15 +10,15 @@ Agent skills and tools for making vertical face-cam shorts (1080 × 1920) for In
 | [hook](skills/hook/SKILL.md) | The opening picture and title, built so frame 0 works as the thumbnail and fits Instagram's profile-grid crop. |
 | [edit-video](skills/edit-video/SKILL.md) | Raw clips in CapCut to a new draft: transcribe, fact-check, cut the gaps, grade, clean and level the audio, place pictures and animation, subtitles, and the checks. |
 | [find-pictures](skills/find-pictures/SKILL.md) | The still picture for each point, from official sources or Wikimedia with licence, placed on the words it shows. |
-| [animated-shots](skills/animated-shots/SKILL.md) | Everything animated in Remotion: shots inside a video or a whole animated video, in a style picked fresh per video ([styles](skills/animated-shots/styles.md)), built by parallel builders and checked by two judges, one running a mute test; plus cards and memes when asked. |
+| [animated-shots](skills/animated-shots/SKILL.md) | Everything animated in Remotion: shots inside a video or a whole animated video, in a style picked fresh per video ([styles](skills/animated-shots/STYLES.md)), built by parallel builders and checked by two judges, one running a mute test; plus cards and memes when asked. |
 
 How they fit: **write-script** writes the script and the storyboard, then stops. **hook** builds the opening from it. **edit-video** owns the CapCut timeline and calls **find-pictures** for stills and **animated-shots** for animation; a fully animated video's timeline belongs to **animated-shots** instead. All of them follow [`video-editor/DESIGN.md`](video-editor/DESIGN.md), the look: palette, fonts, formats, beats, sound and subtitles. Change it to make the videos yours.
 
 ## Make it yours
 
 - `video-editor/DESIGN.md`: palette, fonts, layout, sound and subtitle rules.
-- `skills/write-script/voice.md`: who you are and how you talk on camera. Start it from your published videos; after that it learns from every line you change in a script.
-- `skills/write-script/opinions.md`: your opinions, so scripts keep them in your words. It fills in as you work.
+- `skills/write-script/VOICE.md`: who you are and how you talk on camera. Start it from your published videos; after that it learns from every line you change in a script.
+- `skills/write-script/OPINIONS.md`: your opinions, so scripts keep them in your words. It fills in as you work.
 - `video-editor/assets/sound-effects/` and `video-editor/assets/meme/`: add your own (the README in each lists the names the skills expect).
 
 ## What's here
@@ -26,35 +26,35 @@ How they fit: **write-script** writes the script and the storyboard, then stops.
 | Path | What |
 | --- | --- |
 | `AGENTS.md` | Instructions every agent reads first (`CLAUDE.md` points to it) |
-| `skills/` | The skills above |
+| `skills/` | The skills above, one folder each: `SKILL.md`, reference files in capitals, `agents/openai.yaml` for Codex ([index](skills/README.md)) |
+| `.claude-plugin/` | The Claude Code plugin and marketplace manifests |
+| `scripts/link-skills.sh` | Links the skills into your agent's skills folders |
 | `video-editor/DESIGN.md` | The look, for any editor or AI |
 | `video-editor/scripts/` | Python, Swift and Node tools the skills run (usage in each file's docstring; `python3 <script> --test` for the self-checks, `test_*.py` for the tests) |
 | `video-editor/assets/` | Fonts (SIL OFL); folders for your sound effects and memes |
 | `video-editor/projects/_template/` | Copy to `projects/<MMDD>/` for each new video; holds `cues.py` and `sfx.py` for animated shots |
-| `video-editor/projects/0926/remotion/` | The Remotion project (pnpm): `Picture.tsx` (still pictures and hooks), `Jev.tsx` (card parts), `Subtitles.tsx` (subtitles for a video rendered whole), and the style kits listed in `styles.md` |
+| `video-editor/projects/0926/remotion/` | The Remotion project (pnpm): `Picture.tsx` (still pictures and hooks), `Jev.tsx` (card parts), `Subtitles.tsx` (subtitles for a video rendered whole), and the style kits listed in `STYLES.md` |
 
 Your video jobs (footage, CapCut drafts, renders) stay out of git (`.gitignore`).
 
 ## Install
 
+**As a Claude Code plugin** (Claude Code 2.1.275 or later):
+
+```
+/plugin install ostack-video-editor --marketplace FOwen123/ostack-video-editor
+```
+
+**From a clone**, which also gives you the scripts and the Remotion project the skills run:
+
 ```sh
 git clone https://github.com/FOwen123/ostack-video-editor.git
 cd ostack-video-editor
+./scripts/link-skills.sh        # links each skill into ~/.claude/skills and ~/.agents/skills (Codex)
 (cd video-editor/projects/0926/remotion && pnpm install)
 ```
 
-Link the skills into your agent's skills folder (Claude Code and Codex both read from there):
-
-```sh
-for s in skills/*/; do
-  s=$(basename "$s")
-  for d in "$HOME/.claude/skills" "$HOME/.codex/skills"; do
-    mkdir -p "$d"; test -e "$d/$s" || ln -s "$PWD/skills/$s" "$d/$s"
-  done
-done
-```
-
-Then open your agent in the repository root: the skills' paths (`video-editor/...`) start there, and it reads `AGENTS.md` first.
+Then open your agent in the repository root: the skills' paths (`video-editor/...`) start there, and it reads `AGENTS.md` first. `git pull` updates the linked skills.
 
 ## Requirements
 
