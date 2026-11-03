@@ -1,0 +1,21 @@
+.DS_Store
+__pycache__/
+node_modules/
+
+# Video jobs stay local (footage, drafts, renders, per-video scripts). Only the job template
+# and the shared Remotion project's source are kept.
+video-editor/projects/*
+!video-editor/projects/_template/
+!video-editor/projects/0926/
+video-editor/projects/0926/*
+!video-editor/projects/0926/remotion/
+# per-video pictures and renders
+video-editor/projects/0926/remotion/public/
+video-editor/projects/0926/remotion/out/
+
+# Per-video work outside the jobs
+figures/
+video-editor/reports/
+
+# Xcode per-user state
+xcuserdata/
