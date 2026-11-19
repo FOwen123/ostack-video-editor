@@ -41,6 +41,7 @@ Write `projects/<job>/plan.json` (format in `tighten.py`'s docstring):
 - `"start_at"` to open on a calm frame (mouth closed) when frame 0 looks bad.
 - `"overlays"`: the hook (**hook** skill), the pictures (**find-pictures** skill) and the animated shots (**animated-shots** skill).
 - Split screen (shots on top, face below, as in 1014): 1080×960 overlay files with `"y": 0.5`, `"face_y"` to move the face into the bottom half, and `captions.py --y` to put the subtitles at the seam. `record.mjs` records HTML figures for the top half; speed up long animations with `--speed`.
+- Raw format (`DESIGN.md`, Raw look): each overlay is a Remotion shot built from the user's footage, not a `picture` overlay. Build the shots in `src/<topic>/` from `src/raw/kit.tsx` (`Ig` text, `Pic` photo, `Clip` clip, `At` timing), with `cues.ts` from the job's `cues.py`, put the footage in `public/<topic>/`, render ProRes 4444 `.mov` files into `anim/render/`, and mix the sounds with the job's `sfx.py`. Run `captions.py` with `--scale 1.25,1.15`.
 
 Write the subtitles' data as `projects/<job>/captions/subs.json` (format in `subs.py`'s docstring: clip order, spelling fixes, word pairs to keep together, and the Chinese meaning units by source second), then run `python3 video-editor/scripts/subs.py <job>`: it splits the English into two or three spoken words per cue, on one line, and writes `captions/<job>.cues-src.json` (`[[clip, source_s, "English", "中文"], ...]`), where each Chinese unit repeats on the two or three English cues it spans (`DESIGN.md`, Subtitles). Identical back-to-back lines show as one still line. No punctuation reaches the screen (`captions.py` strips it and keeps it's, GPT-6.1, 4,000, 24/7, $500), so break lines where a comma would go. Subtitles start on the first words the hook doesn't already say, unless the user says otherwise.
 
@@ -83,6 +84,7 @@ Check the subtitles against the final cut, not the source clips:
 - **Timing:** in `captions/<new-draft>.cues.json`, each English cue starts within 0.1s of its first word in the tightened timeline.
 - **Missing words:** the English cues read in order match the kept transcript, with nothing dropped by a cut.
 - **Reading time:** no cue under 0.3s, and no Chinese line under 0.8s.
+- **Fits the width:** Chinese is 1.3× the English size by default (`DESIGN.md`, Subtitles), so keep each Chinese line to about 12 characters; shorten a longer one rather than shrinking the text.
 - **Muted:** read the subtitles alone, without the audio. Every point and the call to action must still make sense.
 
 Then report: draft name, length, loudness and peak, every picture with its source, the fact-check list, and what was left out and why. Say plainly that you can't listen: the user judges the feel.

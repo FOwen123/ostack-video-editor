@@ -5,7 +5,7 @@ description: Write and build the opening hook of a face-cam short, so every vide
 
 # Hook
 
-The opening follows the video's format (`DESIGN.md`, Formats and Hook): a news or education video opens on its first animated shot with the title over it; a personal or opinion video opens on the speaker, with a picture or meme in the headroom and one line of plain text under it. Either way frame 0 is the thumbnail: fully visible, still, plain warm-white serif text, no highlighter, no label, no push-in.
+The opening follows the video's format (`DESIGN.md`, Formats and Hook): a news or education video opens on its first animated shot with the title over it; a personal or opinion video opens on the speaker, with a picture or meme in the headroom and one line of plain text under it. Either way frame 0 is the thumbnail: fully visible, still, plain warm-white serif text (Instagram Edits text in a raw video), no highlighter, no label, no push-in.
 
 ## Steps
 

@@ -37,7 +37,7 @@ Pillar: personal opinion (productivity, the user's own apps, their life).
 
 The user's own experience or opinion.
 
-- **Format**: face cam (format 1), opening on the face; pictures only where a point needs one.
+- **Format**: face cam (format 1), opening on the face; pictures only where a point needs one. Raw (format 4) when the user has their own photos or clips of what they talk about; the storyboard's `On screen` then names which photo or clip plays on each line.
 - **Opening**: drop into the moment of tension, in first person, present stakes ("I have six months to ship this app, and nobody has used it yet.").
 - **Spine**: what the user wanted → what stood in the way → what they tried → the moment that changed their mind → what they do now.
 - **Peaks**: each try that failed or surprised, and the turn where what they believed broke against what happened (the contrast).

@@ -41,15 +41,32 @@ A small leaf-shaped dot (Highlight green, two opposite corners rounded) marks la
 
 ## Formats
 
-Each line of the script is FACE (the speaker on camera) or VO (voice-over under pictures or animation). A video uses one of these formats, or mixes the last two. The shape sets the default (`write-script` SHAPES.md) and the user can override it per video:
+Each line of the script is FACE (the speaker on camera) or VO (voice-over under pictures or animation). A video uses one of these formats, or mixes formats 2 and 3. The shape sets the default (`write-script` SHAPES.md) and the user can override it per video:
 
 1. **Face cam with pictures**: the speaker fills the frame; pictures cut into the headroom. Personal and opinion videos.
 2. **Split screen**: shots in the top half (1080 × 960), the speaker in the bottom half, subtitles on the seam between them (the Anatomy video).
 3. **Full-screen animation**: VO lines play over full-frame animated shots; FACE lines show the speaker cut out over a still background image from the same world (the Korea and self-replicating AI videos). News and education videos.
+4. **Raw**: the speaker fills the frame, and the user's own photos and clips cut in as they are, with Instagram Edits-style text instead of cards (YC Startup School, Latent). Personal videos about something the user lived, when they have their own footage. Its rules are under Raw look.
 
 ### Face lighting
 
 When the speaker is in their own room (formats 1 and 2), the grade gives natural light and a brighter face. When they sit over a dark background (format 3's FACE lines), the footage keeps its own lighting, with no grade.
+
+### Raw look
+
+The edit looks made on a phone, not designed:
+
+- **The user's own footage first**: their photos and clips of the event or the app. Official logos and screenshots only where they have none (Google's logo, a pricing page).
+- **Shown directly**: no see-through layers, no photos behind the speaker, no borders, cards, highlighters or animation. A picture hard-cuts in and stays still.
+- **Photos in the headroom, clips full-frame**: a photo or screenshot fits the 920 × 518 headroom box at y 300 with 16px corners, cropped to the part that matters. A portrait clip fills the whole screen, uncropped; a landscape clip runs full width at y 300; a screen recording taller than 9:16 fits the height on black.
+- **Selective**: not every line gets a visual; the face carries the rest. Mix photos and clips across the video instead of running one kind.
+- **One per item**: when the line lists things (build, launch, fail, keep iterating), each item gets its own clip, cut on the word that names it. No clip stretch or photo appears twice.
+- **Instagram Edits text**: Roboto Condensed Medium, white on a black rounded box (18px corners) per line, about 84px, centred near y 400. For the hook title, section numbers ("1. Leverage AI"), a quote with its speaker, and the call to action ("Comment "LATENT"", "Link in bio"). No serif, no green.
+- **Hook**: the user's own photo or clip in the headroom with the title in Instagram Edits text under it, in place of the serif title.
+- **Subtitles**: English 1.25× and Chinese 1.15× the base size (1118: "make the english subtitle bigger, and the chinese subtitle slightly smaller").
+- **Sound**: a click on each picture cut. A meme sound only where the user asks for one (faaah on "burn your money", vine boom on "$3,000"), at the file's own level; make room under the peak by lowering the voice, never the effect (1118: "i can't hear the sound at all, use the original sound").
+
+Replaced on 1118, don't bring back: photos layered see-through behind the speaker, random piles of photos with clicks everywhere, the green highlighter.
 
 ## Layout
 
@@ -76,7 +93,7 @@ Keep everything inside y 285–1635: the Instagram feed shows a Reel cropped to 
 
 ### Memes and pictures
 
-The picture only, uncropped, with 20px rounded corners, sized to fit a 940 × 520 box in the headroom (wide screenshots up to 1000px). It hard-cuts in with a mouse-click sound and stays still. It never fills the screen. Websites are captured in desktop view.
+The picture only, uncropped, with 20px rounded corners, sized to fit a 940 × 520 box in the headroom (wide screenshots up to 1000px). It hard-cuts in with a mouse-click sound and stays still. It never fills the screen (except in the raw format). Websites are captured in desktop view.
 
 ## Cards
 
@@ -117,7 +134,7 @@ Camera movement on the speaker's clip, separate from overlays. Use it at a turn 
 ## Sound
 
 - Voice at −14 LUFS integrated, true peak under 0 dB. No noise reduction or EQ: the mic recording is clean as it is.
-- Sound effects sit just under the voice (about −17 LUFS). Turn one down further when it lands on a loud word. Optionally, when the user wants them to carry after Instagram's re-encode, set each effect's loudest moment 1 to 3 dB under the voice instead, with the mix's true peak still under −1 dB.
+- Sound effects sit just under the voice (about −17 LUFS; in the raw format, meme sounds play at their own level). Turn one down further when it lands on a loud word. Optionally, when the user wants them to carry after Instagram's re-encode, set each effect's loudest moment 1 to 3 dB under the voice instead, with the mix's true peak still under −1 dB.
 - Each effect is tied to the visual it belongs to, and sounds on the frame that visual appears.
 
 ### Music (only when the user asks)
@@ -150,6 +167,7 @@ At most two impacts and one riser per video. A cut between takes from different 
 ## Subtitles
 
 - English on top, Traditional Chinese below, on separate tracks, both Paper.
+- Chinese is 1.3× the English size with a thicker black outline, in Noto Sans TC Bold, so it reads at a glance (1110: "make the chinese subtitle bigger and more visible"). Keep a Chinese line under about 12 characters so it fits the width.
 - English: two or three spoken words per cue, on one line, so the line switches fast (the retention test started with 1008 Sabi). Three words only when two would leave a single word alone. A name or number that belongs together stays in one cue ("GPT-6.1 Sol", "$4 million"). Each cue holds until the next starts.
 - Numbers show as digits ("7 banks", "4 GB"), and numbered points as "1", "2", "3", never "1st".
 - Chinese: one meaning unit per line, spanning two or three English cues (about 1.2 to 2 seconds, up to about 12 characters). It starts and ends on English cue boundaries. Never split a Chinese word or reorder words across lines to mirror English word order. Chinese grammar runs in a different order, so word-by-word lines read wrong ("能把 / 你的想法 / 轉成文字").
