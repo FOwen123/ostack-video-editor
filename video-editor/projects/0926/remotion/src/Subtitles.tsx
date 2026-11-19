@@ -12,12 +12,12 @@ const { fontFamily: tc } = loadTC("normal", { weights: ["700"] });
 
 export type Cue = [number, string, string];
 
-const line = (top: number, fontFamily: string, fontSize: number, text: string) => (
+const line = (top: number, fontFamily: string, fontSize: number, text: string, stroke = 6) => (
   <div
     style={{
       position: "absolute", left: 80, right: 80, top, transform: "translateY(-50%)", textAlign: "center",
       fontFamily, fontWeight: 700, fontSize, lineHeight: 1, color: "#FEFCF9", whiteSpace: "nowrap",
-      WebkitTextStroke: "6px #000", paintOrder: "stroke fill",
+      WebkitTextStroke: `${stroke}px #000`, paintOrder: "stroke fill",
     }}
   >
     {text}
@@ -31,7 +31,7 @@ export const Subtitles: React.FC<{ cues: Cue[] }> = ({ cues }) => {
   return (
     <AbsoluteFill>
       {cue[1] && line(1478, sans, 43.5, cue[1])}
-      {cue[2] && line(1630, tc, 56, cue[2])}
+      {cue[2] && line(1630, tc, 73, cue[2], 10)}  {/* Chinese 1.3x with a thicker outline, as captions.py draws it in CapCut */}
     </AbsoluteFill>
   );
 };

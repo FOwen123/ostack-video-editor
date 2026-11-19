@@ -147,7 +147,7 @@ def merge_silences(pauses, blip=0.06, head=0.35):
     out = []
     for s, e in sorted(pauses):
         if out and s - out[-1][1] < blip:
-            out[-1] = (out[-1][0], e)
+            out[-1] = (out[-1][0], max(out[-1][1], e))  # a pause inside a longer one must not shorten it
         else:
             out.append((s, e))
     if out and out[0][0] < head:

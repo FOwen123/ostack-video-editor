@@ -1,12 +1,13 @@
 """Add English + Traditional Chinese captions to a CapCut draft, natively.
 
-    python3 captions.py <cues.json> <draft> [--style-from 0929-v1] [--y -0.06,-0.15]
+    python3 captions.py <cues.json> <draft> [--style-from 0929-v1] [--y -0.06,-0.15] [--scale 1.25,1.15]
 
 cues.json: {"end": seconds, "cues": [[start_s, "English", "中文"], ...]}; each
 cue holds until the next one starts; an empty cue [t, "", ""] ends the one before it at t. The caption look (font, size, outline)
 is copied from a styled caption in --style-from, so no SRT import through
 CapCut's file dialog is needed. English and Chinese go on separate tracks,
-English above Chinese with a gap (--y moves them: English,Chinese in canvas half-heights, 0 = centre). Punctuation is stripped (see bare). Also writes <cues>.en.srt / .zh-TW.srt /
+English above Chinese with a gap (--y moves them: English,Chinese in canvas half-heights, 0 = centre; --scale sizes them,
+English,Chinese, against the style caption; default 1,ZH_SCALE). Punctuation is stripped (see bare). Also writes <cues>.en.srt / .zh-TW.srt /
 .bilingual.srt next to cues.json. CapCut must be closed.
 """
 import copy
@@ -20,6 +21,8 @@ import capcut as C
 
 ROOT = C.ROOT
 Y = {"en": -0.54, "zh": -0.70}  # ~77% and ~85% down the frame: chest, clear of app UI
+ZH_FONT = Path(__file__).resolve().parent.parent / "assets" / "brand" / "fonts" / "NotoSansTC-Bold.ttf"
+ZH_SCALE, ZH_STROKE = 1.3, 0.12  # Chinese bigger and outlined harder than English: "make the chinese subtitle bigger and more visible" (1110)
 
 
 def uid():
@@ -67,7 +70,7 @@ def write_json(path, data):
     tmp.replace(path)
 
 
-def main(cues_path, draft, style_from="0929-v1", y=Y):
+def main(cues_path, draft, style_from="0929-v1", y=Y, scale=(1.0, ZH_SCALE)):
     cues_path = Path(cues_path)
     spec = json.loads(cues_path.read_text())
 
@@ -99,6 +102,12 @@ def main(cues_path, draft, style_from="0929-v1", y=Y):
             c["text"] = text
             for st in c["styles"]:
                 st["range"] = [0, len(text)]
+                if lang == "zh":  # DM Sans has no CJK glyphs; Noto Sans TC Bold is the house Chinese face
+                    st["font"]["path"] = str(ZH_FONT)
+                    for k in st.get("strokes", []):
+                        k["width"] = ZH_STROKE
+            if lang == "zh":
+                m.update(font_path=str(ZH_FONT), font_name="Noto Sans TC", font_title="Noto Sans TC", border_width=ZH_STROKE)
             m["content"] = json.dumps(c, ensure_ascii=False)
             d["materials"]["texts"].append(m)
             seg = dict(copy.deepcopy(tmpl_seg), id=uid(), material_id=m["id"],
@@ -112,6 +121,9 @@ def main(cues_path, draft, style_from="0929-v1", y=Y):
                 refs.append(x["id"])
             seg["extra_material_refs"] = refs
             seg["clip"]["transform"].update(x=0.0, y=y[lang])
+            k = scale[0] if lang == "en" else scale[1]
+            if k != 1.0:
+                seg["clip"]["scale"] = {"x": k, "y": k}
             track["segments"].append(seg)
         if track["segments"]:  # an English-only video has no Chinese track
             d["tracks"].append(track)
@@ -141,4 +153,5 @@ if __name__ == "__main__":
         args = sys.argv[1:]
         style = args[args.index("--style-from") + 1] if "--style-from" in args else "0929-v1"
         y = dict(zip(("en", "zh"), map(float, args[args.index("--y") + 1].split(",")))) if "--y" in args else Y
-        main(args[0], args[1], style, y)
+        scale = tuple(map(float, args[args.index("--scale") + 1].split(","))) if "--scale" in args else (1.0, ZH_SCALE)
+        main(args[0], args[1], style, y, scale)
